@@ -1,0 +1,26 @@
+{
+  "name": "crab",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A hardened, easy-to-set-up OpenClaw-compatible AI assistant with native WhatsApp Business Cloud API support.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@9.12.0",
+  "scripts": {
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "crab": "pnpm --filter @crab/cli start",
+    "server": "pnpm --filter @crab/server start",
+    "dev": "pnpm --filter @crab/server dev"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.4"
+  }
+}

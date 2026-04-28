@@ -1,0 +1,19 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "_comment": "Vercel runs serverless functions; long-lived audit/sqlite paths must move to a hosted KV/DB. This template is provided for users who want webhook ingestion only and externalize storage.",
+  "buildCommand": "pnpm -r build",
+  "installCommand": "corepack enable && pnpm install --frozen-lockfile=false",
+  "framework": null,
+  "functions": {
+    "apps/server/dist/index.js": {
+      "maxDuration": 30,
+      "memory": 512
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/apps/server/dist/index.js"
+    }
+  ]
+}

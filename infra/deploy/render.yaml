@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: crab
+    runtime: docker
+    dockerfilePath: ./infra/Dockerfile
+    plan: starter
+    envVars:
+      - key: CRAB_HOST
+        value: "0.0.0.0"
+      - key: CRAB_PORT
+        value: "3000"
+      - key: CRAB_WORKSPACE_DIR
+        value: "/data"
+      - key: WHATSAPP_APP_SECRET
+        sync: false
+      - key: WHATSAPP_ACCESS_TOKEN
+        sync: false
+      - key: WHATSAPP_PHONE_NUMBER_ID
+        sync: false
+      - key: WHATSAPP_BUSINESS_ACCOUNT_ID
+        sync: false
+      - key: WHATSAPP_VERIFY_TOKEN
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+    healthCheckPath: /healthz
+    disk:
+      name: crab-data
+      mountPath: /data
+      sizeGB: 1
