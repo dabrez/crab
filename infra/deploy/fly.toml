@@ -1,0 +1,36 @@
+# fly launch --copy-config
+# Then: fly secrets set WHATSAPP_APP_SECRET=... WHATSAPP_ACCESS_TOKEN=... ...
+app = "crab"
+primary_region = "iad"
+kill_signal = "SIGTERM"
+kill_timeout = 30
+
+[build]
+  dockerfile = "infra/Dockerfile"
+
+[env]
+  CRAB_HOST = "0.0.0.0"
+  CRAB_PORT = "3000"
+  CRAB_WORKSPACE_DIR = "/data"
+
+[mounts]
+  source = "crab_data"
+  destination = "/data"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 1
+
+[[http_service.checks]]
+  grace_period = "10s"
+  interval = "30s"
+  method = "GET"
+  timeout = "5s"
+  path = "/healthz"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "512mb"
